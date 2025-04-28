@@ -3,14 +3,6 @@ const { body } = require("express-validator")
 const nameMinLength = 3
 const passwordMinLength = 5
 
-const comparePasswords = (value, { req }) => {
-    if (value != req.body.password) {
-        throw new Error("As senhas não correspondem")
-    }
-
-    return true
-}
-
 const userCreateValidation = () => {
     return [
         body("name")
@@ -27,7 +19,13 @@ const userCreateValidation = () => {
 
         body("confirmpassword")
             .isString().withMessage("O campo \"Confirmar senha\" é obrigatório")
-            .custom(comparePasswords),
+            .custom((value, { req }) => {
+                if (value != req.body.password) {
+                    throw new Error("As senhas não correspondem")
+                }
+
+                return true
+            }),
     ]
 }
 
