@@ -27,8 +27,20 @@ const userCreateValidation = () => {
 
         body("confirmpassword")
             .isString().withMessage("O campo \"Confirmar senha\" é obrigatório")
-            .custom(comparePasswords)
+            .custom(comparePasswords),
     ]
 }
 
-module.exports = { userCreateValidation }
+const loginValidation = () => {
+    return [
+        body("email")
+            .isString().withMessage("O campo \"E-mail\" é obrigatório")
+            .isEmail().withMessage("Insira um e-mail válido"),
+
+        body("password")
+            .isString().withMessage("O campo \"Senha\" é obrigatório")
+            .isLength({ min: passwordMinLength }).withMessage(`A senha precisa ter no mínimo ${passwordMinLength} caracteres`),
+    ]
+}
+
+module.exports = { userCreateValidation, loginValidation }

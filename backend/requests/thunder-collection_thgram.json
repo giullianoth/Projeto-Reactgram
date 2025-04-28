@@ -1,0 +1,77 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "thgram",
+    "collectionId": "042c74b1-42fa-4392-8085-6ccf593eea78",
+    "dateExported": "2025-04-28T19:14:47.109Z",
+    "version": "1.2",
+    "folders": [
+        {
+            "_id": "f0ce0bc0-e821-44f8-9ba5-442e0de164bf",
+            "name": "User",
+            "containerId": "",
+            "created": "2025-04-28T16:52:38.294Z",
+            "sortNum": 10000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "3036dd66-6ea4-42fd-84b4-ff4994ffd505",
+            "colId": "042c74b1-42fa-4392-8085-6ccf593eea78",
+            "containerId": "",
+            "name": "test",
+            "url": "http://localhost:5000/",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2025-04-28T14:57:06.328Z",
+            "modified": "2025-04-28T14:57:34.984Z",
+            "headers": []
+        },
+        {
+            "_id": "9dfdcbbb-fe7c-4c22-9e98-bfd6057adb1d",
+            "colId": "042c74b1-42fa-4392-8085-6ccf593eea78",
+            "containerId": "f0ce0bc0-e821-44f8-9ba5-442e0de164bf",
+            "name": "Register and sign in",
+            "url": "http://localhost:5000/api/users/register",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2025-04-28T16:52:53.489Z",
+            "modified": "2025-04-28T17:21:05.906Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Robotnik\",\n  \"email\": \"pingas@email.com\",\n  \"password\": \"12345\",\n  \"confirmpassword\": \"12345\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "6b6da9b7-7e4f-476b-b9ff-4bcb5c0da474",
+            "colId": "042c74b1-42fa-4392-8085-6ccf593eea78",
+            "containerId": "f0ce0bc0-e821-44f8-9ba5-442e0de164bf",
+            "name": "Sign in",
+            "url": "http://localhost:5000/api/users/login",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2025-04-28T17:54:22.280Z",
+            "modified": "2025-04-28T17:55:59.150Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"pingas@email.com\",\n  \"password\": \"123456\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "c65786e6-5383-4113-9178-a6682058776c",
+            "colId": "042c74b1-42fa-4392-8085-6ccf593eea78",
+            "containerId": "f0ce0bc0-e821-44f8-9ba5-442e0de164bf",
+            "name": "Get current user",
+            "url": "http://localhost:5000/api/users/profile",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2025-04-28T19:10:18.043Z",
+            "modified": "2025-04-28T19:10:36.151Z",
+            "headers": []
+        }
+    ],
+    "ref": "dTN9zQTqjstKdiJT5HFctPYX51RUHkAkOLXWw_g6HMn04GqChy_D17XNkyly06PHNe-ZMk7b5UL0O3Fcp3G1jw"
+}
