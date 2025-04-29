@@ -20,3 +20,19 @@
     -webkit-text-stroke: 1px currentColor;
     -webkit-text-fill-color: transparent;
 }
+
+.navbar .active {
+    color: var(--color-accent-secondary);
+}
+
+.title {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    row-gap: 6px;
+    margin-bottom: 30px;
+}
+
+.title p {
+    color: var(--color-text-secondary);
+}

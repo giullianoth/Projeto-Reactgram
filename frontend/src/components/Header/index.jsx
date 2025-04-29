@@ -7,6 +7,12 @@ import { useState } from "react"
 const Header = () => {
     const [formIsVisible, setFormIsVisible] = useState(false)
 
+    const handleSubmit = event => {
+        event.preventDefault()
+
+        setFormIsVisible(false)
+    }
+
     return (
         <header className={styles.header}>
             <Container className={styles.header__container}>
@@ -36,7 +42,7 @@ const Header = () => {
                     </button>
 
                     <div className={styles.header__searchForm + (formIsVisible ? ` ${styles.visible}` : "")}>
-                        <form>
+                        <form onSubmit={handleSubmit}>
                             <BsSearch className={styles.header__searchIcon} />
                             <input type="text" placeholder="Procurar" />
                         </form>

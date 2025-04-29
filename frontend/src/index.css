@@ -3,12 +3,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
-    --color-primary: #2A2A2A;
+    --color-primary: #1F1F1F;
     --color-secondary: #615f5f;
+    --color-tertiary: #111111;
     --color-text: #F5F5F5;
     --color-text-secondary: #b1b1b1;
     --color-accent: #E04646;
-    --color-accent-secondary: #4378ec;
+    --color-accent-secondary: #7CA4FC;
 }
 
 * {
@@ -32,6 +33,14 @@ li {
     list-style-type: none;
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    max-width: 430px;
+    margin-inline: auto;
+}
+
 input, textarea {
     font-family: inherit;
     font-size: inherit;
@@ -41,6 +50,8 @@ input, textarea {
     border: none;
     padding: 6px 12px;
     border-radius: 5px;
+    display: block;
+    width: 100%;
 }
 
 input::placeholder, textarea::placeholder {
@@ -56,4 +67,20 @@ button {
     padding: 0;
     cursor: pointer;
     display: inline-block;
+}
+
+input:disabled, textarea:disabled {
+    cursor: not-allowed;
+    color: var(--color-secondary);
+    background-color: var(--color-primary);
+    border: 1px solid var(--color-text-secondary);
+}
+
+button:disabled {
+    cursor: not-allowed;
+    color: var(--color-secondary);
+}
+
+section {
+    padding-block: 60px;
 }
