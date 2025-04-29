@@ -19,4 +19,20 @@ const photoInsertValidation = () => {
     ]
 }
 
-module.exports = { photoInsertValidation }
+const photoUpdateValidation = () => {
+    return [
+        body("title")
+            .optional()
+            .isString().withMessage("O campo \"Título\" é obrigatório")
+            .isLength({ min: titleMinLength }).withMessage(`O título precisa ter no mínimo ${titleMinLength} caracteres`),
+    ]
+}
+
+const commentValidation = () => {
+    return [
+        body("comment")
+            .isString().withMessage("O campo \"Comentário\" é obrigatório")
+    ]
+}
+
+module.exports = { photoInsertValidation, photoUpdateValidation, commentValidation }
