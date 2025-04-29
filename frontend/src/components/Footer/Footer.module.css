@@ -1,0 +1,15 @@
+.footer {
+    padding-block: 10px;
+    font-size: 0.8em;
+}
+
+.footer__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.footer__logo {
+    font-size: 1em;
+}

@@ -1,0 +1,22 @@
+#root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#root main {
+    flex-grow: 1;
+}
+
+.logo {
+    font-family: "Kaushan Script", cursive;
+    font-size: 1.2rem;
+}
+
+.logo span {
+    font-family: sans-serif;
+    text-transform: uppercase;
+    font-weight: 900;
+    -webkit-text-stroke: 1px currentColor;
+    -webkit-text-fill-color: transparent;
+}
