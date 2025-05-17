@@ -21,11 +21,10 @@ const imageStorage = multer.diskStorage({
 
 const imageUpload = multer({
     storage: imageStorage,
-    fileFilter: (req, file, cb) => {
-        
+    fileFilter: (req, file, cb) => {        
         // Upload only png and jpeg formats
         if (!file.originalname.match(/\.(png|jpg|jpeg)$/)) {
-            return cb(new Error("Formato inválido (Envie png ou jpeg)"))
+            return cb(new Error("Formato inválido (Envie apenas png ou jpeg)"))
         }
 
         cb(null, true)

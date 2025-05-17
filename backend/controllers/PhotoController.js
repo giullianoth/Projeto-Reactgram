@@ -7,8 +7,16 @@ const insertPhoto = async (req, res) => {
     const { title } = req.body
     const image = req.file.filename
 
-    const reqUser = req.reqUser
+    const reqUser = req.user
     const user = await User.findById(reqUser._id)
+
+    if (!user) {
+        res.status(422).json({
+            errors: ["Houve um problema, por favor, tente mais tarde."]
+        })
+
+        return
+    }
 
     // Create a photo
     const newPhoto = await Photo.create({
@@ -36,7 +44,7 @@ const deletePhoto = async (req, res) => {
     const reqUser = req.user
 
     try {
-        const photo = await Photo.findById(mongoose.Types.ObjectId(id))
+        const photo = await Photo.findById(new mongoose.Types.ObjectId(id))
 
         // Check if photo exists
         if (!photo) {
@@ -56,7 +64,7 @@ const deletePhoto = async (req, res) => {
         await Photo.findByIdAndDelete(photo._id)
         res.status(200).json({ id: photo._id, message: "Foto excluída" })
     } catch (error) {
-        res.status(404).json({ id: photo._id, message: "Foto não encontrada" })
+        res.status(404).json({ errors: ["Foto não encontrada"] })
     }
 }
 
@@ -76,15 +84,20 @@ const getUserPhotos = async (req, res) => {
 // Get photo by ID
 const getPhotoById = async (req, res) => {
     const { id } = req.params
-    const photo = await Photo.findById(mongoose.Types.ObjectId(id))
 
-    // Check if photo exists
-    if (!photo) {
+    try {
+        const photo = await Photo.findById(new mongoose.Types.ObjectId(id))
+
+        // Check if photo exists
+        if (!photo) {
+            res.status(404).json({ errors: ["Foto não encontrada"] })
+            return
+        }
+
+        res.status(200).json(photo)
+    } catch (error) {
         res.status(404).json({ errors: ["Foto não encontrada"] })
-        return
     }
-
-    res.status(200).json(photo)
 }
 
 // Update a photo
