@@ -3,13 +3,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
-    --color-primary: #1F1F1F;
-    --color-secondary: #615f5f;
-    --color-tertiary: #111111;
-    --color-text: #F5F5F5;
-    --color-text-secondary: #b1b1b1;
-    --color-accent: #E04646;
-    --color-accent-secondary: #7CA4FC;
+    --color-primary-background: #000;
+    --color-secondary-background: #121212;
+    --color-primary-text: #F5F5F5;
+    --color-secondary-text: #A8A8A8;
+    --color-primary-button: #0095F6;
+    --color-primary-button-7: #0094F6B3;
+    --color-secondary-button-disabled: #828282;
+    --color-separator: #363636;
+    --color-primary-background-error: #F35369;
+    --color-primary-text-error: #FA383E;
+
+    --transition: all 0.3s ease;
 }
 
 * {
@@ -20,13 +25,14 @@
 
 body {
     font-family: "Roboto", sans-serif;
-    background-color: var(--color-primary);
-    color: var(--color-text);
+    background-color: var(--color-primary-background);
+    color: var(--color-primary-text);
 }
 
 a {
-    color: inherit;
+    color: var(--color-primary-button);
     text-decoration: none;
+    transition: var(--transition);
 }
 
 li {
@@ -36,49 +42,26 @@ li {
 form {
     display: flex;
     flex-direction: column;
-    row-gap: 10px;
-    max-width: 430px;
-    margin-inline: auto;
+    gap: 10px;
 }
 
 input, textarea {
-    font-family: inherit;
-    font-size: inherit;
-    color: inherit;
-    outline: none;
-    background-color: var(--color-secondary);
-    border: none;
-    padding: 6px 12px;
+    background-color: var(--color-secondary-background);
+    border: 1px solid var(--color-separator);
     border-radius: 5px;
-    display: block;
-    width: 100%;
+    padding: 10px;
+    outline: none;
+    font-size: inherit;
+    font-family: inherit;
+    color: inherit;
 }
 
 input::placeholder, textarea::placeholder {
-    color: var(--color-text-secondary);
+    color: var(--color-secondary-text);
 }
 
-button {
-    font-family: inherit;
-    font-size: inherit;
-    color: var(--color-accent-secondary);
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    display: inline-block;
-}
-
-input:disabled, textarea:disabled {
-    cursor: not-allowed;
-    color: var(--color-secondary);
-    background-color: var(--color-primary);
-    border: 1px solid var(--color-text-secondary);
-}
-
-button:disabled {
-    cursor: not-allowed;
-    color: var(--color-secondary);
+svg {
+    margin-bottom: -2px;
 }
 
 section {

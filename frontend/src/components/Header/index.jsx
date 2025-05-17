@@ -1,60 +1,55 @@
-import { Link, NavLink } from "react-router-dom"
-import Container from "../Container"
 import styles from "./Header.module.css"
+import Container from "../Container"
+import { NavLink } from "react-router-dom"
 import { BsSearch, BsX } from "react-icons/bs"
 import { useState } from "react"
 
 const Header = () => {
-    const [formIsVisible, setFormIsVisible] = useState(false)
+  const [searchIsVisible, setSearchIsVisible] = useState(false)
 
-    const handleSubmit = event => {
-        event.preventDefault()
+  return (
+    <header className={styles.header}>
+      <Container className={styles.header__container} expanded>
+        <NavLink to="/">
+          <h1 className={styles.header__title}>
+            <span className="logo">Thgram</span>
+          </h1>
+        </NavLink>
 
-        setFormIsVisible(false)
-    }
+        <nav>
+          <ul className={styles.header__menu}>
+            <li>
+              <NavLink to="/login" className="mainMenuLink">Entrar</NavLink>
+            </li>
 
-    return (
-        <header className={styles.header}>
-            <Container className={styles.header__container}>
-                <h1 className={styles.header__title}>
-                    <Link to="/">
-                        <span className="logo">
-                            <span>th</span> Thgram
-                        </span>
-                    </Link>
-                </h1>
+            <li>
+              <NavLink to="/cadastrar" className="mainMenuLink">Cadastrar</NavLink>
+            </li>
+          </ul>
+        </nav>
 
-                <nav>
-                    <ul className={`navbar ${styles.header__navbar}`}>
-                        <li>
-                            <NavLink to="/login">Entrar</NavLink>
-                        </li>
+        <div className={styles.header__search}>
+          <button className={`button clear ${styles.open}`} onClick={() => setSearchIsVisible(true)}>
+            <BsSearch />
+          </button>
 
-                        <li>
-                            <NavLink to="/cadastrar">Cadastrar</NavLink>
-                        </li>
-                    </ul>
-                </nav>
+          <form className={searchIsVisible ? styles.visible : ""}>
+            <div className={styles.header__searchWrapper}>
+              <span className={styles.search}>
+                <BsSearch />
+              </span>
 
-                <div className={styles.header__search}>
-                    <button className={styles.header__searchButton} onClick={() => setFormIsVisible(true)}>
-                        <BsSearch />
-                    </button>
+              <input type="text" placeholder="Pesquisar" />
 
-                    <div className={styles.header__searchForm + (formIsVisible ? ` ${styles.visible}` : "")}>
-                        <form onSubmit={handleSubmit}>
-                            <BsSearch className={styles.header__searchIcon} />
-                            <input type="text" placeholder="Procurar" />
-                        </form>
-
-                        <button className={styles.header__searchClose} onClick={() => setFormIsVisible(false)}>
-                            <BsX />
-                        </button>
-                    </div>
-                </div>
-            </Container>
-        </header>
-    )
+              <span className={styles.close} onClick={() => setSearchIsVisible(false)}>
+                <BsX />
+              </span>
+            </div>
+          </form>
+        </div>
+      </Container>
+    </header>
+  )
 }
 
 export default Header

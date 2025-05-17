@@ -10,29 +10,43 @@
 
 .logo {
     font-family: "Kaushan Script", cursive;
-    font-size: 1.2rem;
 }
 
-.logo span {
-    font-family: sans-serif;
-    text-transform: uppercase;
-    font-weight: 900;
-    -webkit-text-stroke: 1px currentColor;
-    -webkit-text-fill-color: transparent;
+.mainMenuLink.active {
+    color: var(--color-primary-button);
 }
 
-.navbar .active {
-    color: var(--color-accent-secondary);
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10px;
+    padding: 12px 24px;
+    background-color: var(--color-primary-button-7);
+    color: var(--color-primary-text);
+    border-radius: 10px;
+    border: none;
+    font-size: inherit;
+    font-family: inherit;
+    cursor: pointer;
+    transition: var(--transition);
 }
 
-.title {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    row-gap: 6px;
-    margin-bottom: 30px;
+.button:hover {
+    background-color: var(--color-primary-button);
 }
 
-.title p {
-    color: var(--color-text-secondary);
+.button.small {
+    padding: 6px 14px;
+    border-radius: 6px;
+}
+
+.button.clear {
+    padding: 0;
+    background: none;
+}
+
+.button:disabled, .button.disabled {
+    background-color: var(--color-secondary-button-disabled);
+    cursor: not-allowed;
 }
