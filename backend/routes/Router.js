@@ -1,12 +1,15 @@
-const express = require("express")
+import express from "express"
+import userRouter from "./UserRoutes.js"
+import photoRouter from "./PhotoRoutes.js"
+
 const router = express()
 
-router.use("/api/users", require("./UserRoutes"))
-router.use("/api/photos", require("./PhotoRoutes"))
+router.use("/api/users", userRouter)
+router.use("/api/photos", photoRouter)
 
-// Test route
+// Test Router
 router.get("/", (req, res) => {
-    res.send("API em funcionamento")
+    res.send("API em funcionamento!")
 })
 
-module.exports = router
+export default router

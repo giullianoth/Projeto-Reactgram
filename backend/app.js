@@ -1,11 +1,12 @@
-require("dotenv").config()
-
-const express = require("express")
-const path = require("path")
-const cors = require("cors")
+import express from "express"
+import path from "path"
+import { fileURLToPath } from "url"
+import cors from "cors"
+import "dotenv/config"
+import router from "./routes/Router.js"
+import Connect from "./config/db.js"
 
 const port = process.env.PORT
-
 const app = express()
 
 // Config JSON and form data response
@@ -16,13 +17,14 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cors({ credentials: true, origin: "http://localhost:5173" }))
 
 // Upload directory
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")))
 
-// DB connection
-require("./config/db.js")
+// DB Connection
+Connect()
 
 // Routes
-const router = require("./routes/Router.js")
 app.use(router)
 
 app.listen(port, () => {

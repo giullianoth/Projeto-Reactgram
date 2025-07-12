@@ -1,56 +1,48 @@
-const { body } = require("express-validator")
+import { body } from "express-validator"
 
 const nameMinLength = 3
 const passwordMinLength = 5
 
-const userCreateValidation = () => {
-    return [
-        body("name")
-            .isString().withMessage("O campo \"Nome\" é obrigatório")
-            .isLength({ min: nameMinLength }).withMessage(`O nome precisa ter no mínimo ${nameMinLength} caracteres`),
+export const validateCreateUser = () => [
+    body("name")
+        .isString().withMessage("Preencha o nome.")
+        .isLength({ min: nameMinLength }).withMessage(`O nome precisa ter no mínimo ${nameMinLength} caracteres.`),
 
-        body("email")
-            .isString().withMessage("O campo \"E-mail\" é obrigatório")
-            .isEmail().withMessage("Insira um e-mail válido"),
+    body("email")
+        .isString().withMessage("Preencha o e-mail.")
+        .isEmail().withMessage("Insira um e-mail válido."),
 
-        body("password")
-            .isString().withMessage("O campo \"Senha\" é obrigatório")
-            .isLength({ min: passwordMinLength }).withMessage(`A senha precisa ter no mínimo ${passwordMinLength} caracteres`),
+    body("password")
+        .isString().withMessage("Forneça uma senha.")
+        .isLength({ min: passwordMinLength }).withMessage(`A senha precisa ter no mínimo ${passwordMinLength} caracteres.`),
 
-        body("confirmPassword")
-            .isString().withMessage("O campo \"Confirmar senha\" é obrigatório")
-            .custom((value, { req }) => {
-                if (value != req.body.password) {
-                    throw new Error("As senhas não correspondem")
-                }
+    body("confirmPassword")
+        .isString().withMessage("Confirme a sua senha.")
+        .custom((value, { req }) => {
+            if (value != req.body.password) {
+                throw new Error("As senhas não correspondem.")
+            }
+            return true
+        })
+]
 
-                return true
-            }),
-    ]
-}
 
-const loginValidation = () => {
-    return [
-        body("email")
-            .isString().withMessage("O campo \"E-mail\" é obrigatório")
-            .isEmail().withMessage("Insira um e-mail válido"),
+export const validateLogin = () => [
+    body("email")
+        .isString().withMessage("Preencha o e-mail.")
+        .isEmail().withMessage("Insira um e-mail válido."),
 
-        body("password")
-            .isString().withMessage("O campo \"Senha\" é obrigatório")
-            .isLength({ min: passwordMinLength }).withMessage(`A senha precisa ter no mínimo ${passwordMinLength} caracteres`),
-    ]
-}
+    body("password")
+        .isString().withMessage("Confirme a sua senha.")
+]
 
-const userUpdateValidation = () => {
-    return [
-        body("name")
-            .optional()
-            .isLength({ min: nameMinLength }).withMessage(`O nome precisa ter no mínimo ${nameMinLength} caracteres`),
 
-        body("password")
-            .optional()
-            .isLength({ min: passwordMinLength }).withMessage(`A senha precisa ter no mínimo ${passwordMinLength} caracteres`),
-    ]
-}
+export const validateUpdateUser = () => [
+    body("name")
+        .optional()
+        .isLength({ min: nameMinLength }).withMessage(`O nome precisa ter no mínimo ${nameMinLength} caracteres.`),
 
-module.exports = { userCreateValidation, loginValidation, userUpdateValidation }
+    body("password")
+        .optional()
+        .isLength({ min: passwordMinLength }).withMessage(`A senha precisa ter no mínimo ${passwordMinLength} caracteres.`),
+]

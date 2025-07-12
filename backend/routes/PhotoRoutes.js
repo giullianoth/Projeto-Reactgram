@@ -1,34 +1,20 @@
-const express = require("express")
-const router = express.Router()
+import express from "express"
+import authGuard from "../middlewares/authGuard.js"
+import { imageUpload } from "../middlewares/imageUpload.js"
+import { validateComment, validateInsertPhoto, validateUpdatePhoto } from "../middlewares/validatePhoto.js"
+import validate from "../middlewares/handleValidate.js"
+import { commentPhoto, deletePhoto, getAllPhotos, getPhotoById, getPhotosByUser, insertPhoto, likePhoto, searchPhotos, updatePhoto } from "../controllers/PhotoController.js"
 
-// Controller
-const {
-    insertPhoto,
-    deletePhoto,
-    getAllPhotos,
-    getUserPhotos,
-    getPhotoById,
-    updatePhoto,
-    likePhoto,
-    commentPhoto,
-    searchPhotos
-} = require("../controllers/PhotoController")
+const photoRouter = express.Router()
 
-// Middlewares
-const { photoInsertValidation, photoUpdateValidation, commentValidation } = require("../middlewares/validatePhoto")
-const authGuard = require("../middlewares/authGuard")
-const validate = require("../middlewares/handleValidate")
-const { imageUpload } = require("../middlewares/imageUpload")
+photoRouter.post("/", authGuard, imageUpload.single("image"), validateInsertPhoto(), validate, insertPhoto)
+photoRouter.delete("/:id", authGuard, deletePhoto)
+photoRouter.get("/", authGuard, getAllPhotos)
+photoRouter.get("/user/:id", authGuard, getPhotosByUser)
+photoRouter.get("/search", authGuard, searchPhotos)
+photoRouter.get("/:id", authGuard, getPhotoById)
+photoRouter.put("/like/:id", authGuard, likePhoto)
+photoRouter.put("/comment/:id", authGuard, validateComment(), validate, commentPhoto)
+photoRouter.put("/:id", authGuard, validateUpdatePhoto(), validate, updatePhoto)
 
-// Routes
-router.post("/", authGuard, imageUpload.single("image"), photoInsertValidation(), validate, insertPhoto)
-router.delete("/:id", authGuard, deletePhoto)
-router.get("/", authGuard, getAllPhotos)
-router.get("/user/:id", authGuard, getUserPhotos)
-router.get("/search", authGuard, searchPhotos)
-router.get("/:id", authGuard, getPhotoById)
-router.put("/:id", authGuard, photoUpdateValidation(), validate, updatePhoto)
-router.put("/like/:id", authGuard, likePhoto)
-router.put("/comment/:id", authGuard, commentValidation(), validate, commentPhoto)
-
-module.exports = router
+export default photoRouter

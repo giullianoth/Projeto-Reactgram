@@ -1,13 +1,23 @@
 import styles from "./Auth.module.css"
 import Container from "../../components/Container"
 import { Link } from "react-router-dom"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { register, reset } from "../../slices/authSlice"
+import Trigger from "../../components/Trigger"
 
 const Register = () => {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
+
+  const dispatch = useDispatch()
+  const { loading, error } = useSelector(state => state.auth)
+
+  useEffect(() => {
+    dispatch(reset())
+  }, [dispatch])
 
   const handleSubmit = event => {
     event.preventDefault()
@@ -20,6 +30,8 @@ const Register = () => {
     }
 
     console.log(user)
+
+    dispatch(register(user))
   }
 
   return (
@@ -63,8 +75,12 @@ const Register = () => {
               value={confirmPassword}
               onChange={event => setConfirmPassword(event.target.value)} />
 
-            <button type="submit" className="button">Cadastrar</button>
+            <button type="submit" className="button" disabled={loading}>
+              {loading ? "Aguarde..." : "Cadastrar"}
+            </button>
           </form>
+
+          {error && <Trigger type="error" message={error} />}
         </div>
 
         <p className={`${styles.auth__wrapper} ${styles.last}`}>Já tem uma conta? <Link to="/login">Log in</Link></p>

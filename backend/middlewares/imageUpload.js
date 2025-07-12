@@ -1,34 +1,34 @@
-const multer = require("multer")
-const path = require("path")
+import multer from "multer"
+import path from "path"
 
-// Destination to store
+// Destination to store image
 const imageStorage = multer.diskStorage({
     destination: (req, file, cb) => {
         let folder = ""
 
         if (req.baseUrl.includes("users")) {
             folder = "users"
-        } else if (req.baseUrl.includes("photos")) {
+        }
+
+        if (req.baseUrl.includes("photos")) {
             folder = "photos"
         }
 
         cb(null, `uploads/${folder}/`)
     },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname))
-    }
+
+    filename: (req, file, cb) => cb(null, Date.now() + path.extname(file.originalname))
 })
 
-const imageUpload = multer({
+export const imageUpload = multer({
     storage: imageStorage,
-    fileFilter: (req, file, cb) => {        
-        // Upload only png and jpeg formats
+
+    fileFilter: (req, file, cb) => {
         if (!file.originalname.match(/\.(png|jpg|jpeg)$/)) {
-            return cb(new Error("Formato inválido (Envie apenas png ou jpeg)"))
+            // Upload only PNG and JPG/JPEG formats
+            return cb(new Error("Formato inválido, apenas PNG ou JPEG."))
         }
 
-        cb(null, true)
+        cb(undefined, true)
     }
 })
-
-module.exports = { imageUpload }
