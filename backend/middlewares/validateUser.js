@@ -6,7 +6,7 @@ const passwordMinLength = 5
 export const validateCreateUser = () => [
     body("name")
         .isString().withMessage("Preencha o nome.")
-        .isLength({ min: nameMinLength }).withMessage(`O nome precisa ter no mínimo ${nameMinLength} caracteres.`),
+        .isLength({ min: nameMinLength }).withMessage(`O nome precisa ter, no mínimo, ${nameMinLength} caracteres.`),
 
     body("email")
         .isString().withMessage("Preencha o e-mail.")

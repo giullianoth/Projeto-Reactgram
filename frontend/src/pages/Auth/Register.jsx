@@ -83,7 +83,7 @@ const Register = () => {
           {error && <Trigger type="error" message={error} />}
         </div>
 
-        <p className={`${styles.auth__wrapper} ${styles.last}`}>Já tem uma conta? <Link to="/login">Log in</Link></p>
+        <p className={`${styles.auth__wrapper} ${styles.last}`}>Já tem uma conta? <Link to="/login">Faça login</Link></p>
       </Container>
     </section>
   )

@@ -50,3 +50,11 @@
     background-color: var(--color-secondary-button-disabled);
     cursor: not-allowed;
 }
+
+.loading {
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,11 +1,25 @@
 import styles from "./Header.module.css"
 import Container from "../Container"
-import { NavLink } from "react-router-dom"
-import { BsSearch, BsX } from "react-icons/bs"
+import { NavLink, useNavigate } from "react-router-dom"
+import { BsFillCameraFill, BsFillPersonFill, BsHouseDoorFill, BsSearch, BsX } from "react-icons/bs"
 import { useState } from "react"
+import { useAuth } from "../../hooks/useAuth"
+import { useDispatch, useSelector } from "react-redux"
+import { RiLogoutBoxRLine } from "react-icons/ri"
+import { logout, reset } from "../../slices/authSlice"
 
 const Header = () => {
   const [searchIsVisible, setSearchIsVisible] = useState(false)
+  const { auth } = useAuth()
+  const { user } = useSelector(state => state.auth)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const handleLogout = () => {
+    dispatch(logout())
+    dispatch(reset())
+    navigate("/login")
+  }
 
   return (
     <header className={styles.header}>
@@ -18,13 +32,43 @@ const Header = () => {
 
         <nav>
           <ul className={styles.header__menu}>
-            <li>
-              <NavLink to="/login" className="mainMenuLink">Entrar</NavLink>
-            </li>
+            {auth
+              ? <>
+                <li>
+                  <NavLink to="/" className="mainMenuLink">
+                    <BsHouseDoorFill />
+                  </NavLink>
+                </li>
 
-            <li>
-              <NavLink to="/cadastrar" className="mainMenuLink">Cadastrar</NavLink>
-            </li>
+                {user &&
+                  <li>
+                    <NavLink to={`/usuarios/${user._id}`} className="mainMenuLink">
+                      <BsFillCameraFill />
+                    </NavLink>
+                  </li>}
+
+                <li>
+                  <NavLink to={"/perfil"} className="mainMenuLink">
+                    <BsFillPersonFill />
+                  </NavLink>
+                </li>
+
+                <li>
+                  <button className="button clear" onClick={handleLogout}>
+                    <RiLogoutBoxRLine />
+                  </button>
+                </li>
+              </>
+
+              : <>
+                <li>
+                  <NavLink to="/login" className="mainMenuLink">Entrar</NavLink>
+                </li>
+
+                <li>
+                  <NavLink to="/cadastrar" className="mainMenuLink">Cadastrar</NavLink>
+                </li>
+              </>}
           </ul>
         </nav>
 
