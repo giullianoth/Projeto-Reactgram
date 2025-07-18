@@ -12,3 +12,7 @@
 .trigger.error {
     background-color: var(--color-primary-background-error);
 }
+
+.trigger.success {
+    background-color: var(--color-primary-background-success);
+}

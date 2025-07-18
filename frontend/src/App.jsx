@@ -6,6 +6,7 @@ import Register from "./pages/Auth/Register"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
 import { useAuth } from "./hooks/useAuth"
+import EditProfile from "./pages/EditProfile"
 
 function App() {
   const { auth, loading } = useAuth()
@@ -23,6 +24,7 @@ function App() {
           <Route path="/" element={auth ? <Home /> : <Navigate to="/login" />} />
           <Route path="/login" element={auth ? <Navigate to="/" /> : <Login />} />
           <Route path="/cadastrar" element={auth ? <Navigate to="/" /> : <Register />} />
+          <Route path="/perfil" element={auth ? <EditProfile /> : <Navigate to="/login" />} />
         </Routes>
       </main>
 

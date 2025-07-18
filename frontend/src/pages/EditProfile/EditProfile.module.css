@@ -1,0 +1,21 @@
+.editProfile__imagePreview {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.editProfile__imagePreview img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+}
+
+.editProfile__separated {
+    margin-bottom: 20px;
+}
+
+@media screen and (min-width: 992px) {
+    .editProfile__imagePreview img {
+        width: 200px;
+        height: 200px;
+    }
+}

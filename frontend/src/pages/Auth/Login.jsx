@@ -27,9 +27,9 @@ const Login = () => {
       <Container>
         <div className={`${styles.auth__wrapper} ${styles.first}`}>
           <header className={styles.auth__title}>
-            <h1>
+            <h2>
               <span className="logo">Thgram</span>
-            </h1>
+            </h2>
 
             <p>Faça o login para ver o que há de novo.</p>
           </header>

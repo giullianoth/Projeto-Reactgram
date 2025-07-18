@@ -39,9 +39,9 @@ const Register = () => {
       <Container>
         <div className={`${styles.auth__wrapper} ${styles.first}`}>
           <header className={styles.auth__title}>
-            <h1>
+            <h2>
               <span className="logo">Thgram</span>
-            </h1>
+            </h2>
 
             <p>Cadastre-se para ver as fotos dos seus amigos.</p>
           </header>

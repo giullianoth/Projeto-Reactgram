@@ -13,6 +13,8 @@
     --color-separator: #363636;
     --color-primary-background-error: #F35369;
     --color-primary-text-error: #FA383E;
+    --color-primary-background-success: #21C063;
+    --color-primary-text-success: #2e7a4e;
 
     --transition: all 0.3s ease;
 }
@@ -45,6 +47,12 @@ form {
     gap: 10px;
 }
 
+label {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;  
+}
+
 input, textarea {
     background-color: var(--color-secondary-background);
     border: 1px solid var(--color-separator);
@@ -60,10 +68,23 @@ input::placeholder, textarea::placeholder {
     color: var(--color-secondary-text);
 }
 
+input:disabled, textarea:disabled, input.disabled, textarea.disabled {
+    color: var(--color-secondary-button-disabled);
+    background-color: transparent;
+    cursor: not-allowed;
+}
+
 svg {
     margin-bottom: -2px;
 }
 
 section {
     padding-block: 60px;
+}
+
+img {
+    width: auto;
+    max-width: 100%;
+    object-fit: cover;
+    object-position: center;
 }

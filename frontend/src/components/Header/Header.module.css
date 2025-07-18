@@ -31,6 +31,12 @@
     color: var(--color-primary-text);
 }
 
+.header__profileImage {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
 .header__searchWrapper {
     height: 100%;
     max-width: 480px;
