@@ -39,7 +39,7 @@ const Header = () => {
               ? <>
                 {user &&
                   <li>
-                    <NavLink to={`/usuarios/${user._id}`} className="mainMenuLink">
+                    <NavLink to={`/usuario/${user._id}`} className="mainMenuLink">
                       <img src={`${uploads}/users/${user.profileImage}` ?? userIcon} alt={user.name} className={styles.header__profileImage} />
                     </NavLink>
                   </li>}

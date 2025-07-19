@@ -1,0 +1,30 @@
+.form__heading {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.form__heading h2 {
+    font-size: 1.2em;
+}
+
+.form__photoPreview img {
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.form__label {
+    margin-bottom: 20px;
+}
+
+.form__actions {
+    display: flex;
+    gap: 10px;
+}
+
+.form__actions button {
+    flex-grow: 1;
+}
+
+.form__actions button.cancel {
+    background-color: var(--color-separator);
+}
