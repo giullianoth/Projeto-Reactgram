@@ -1,0 +1,9 @@
+.container {
+    max-width: 576px;
+    margin-inline: auto;
+    padding-inline: 20px;
+}
+
+.large {
+    max-width: 900px;
+}
