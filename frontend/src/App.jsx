@@ -1,39 +1,34 @@
-import "./App.css"
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
-import Home from "./pages/Home"
-import Login from "./pages/Auth/Login"
-import Register from "./pages/Auth/Register"
-import Header from "./components/Header"
-import Footer from "./components/Footer"
-import { useAuth } from "./hooks/useAuth"
-import EditProfile from "./pages/EditProfile"
-import Profile from "./pages/Profile"
-import Photo from "./pages/Photo"
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
 
 function App() {
-  const { auth, loading } = useAuth()
-
-  if (loading) {
-    return <div className="loading">Carregando...</div>
-  }
+  const [count, setCount] = useState(0)
 
   return (
-    <BrowserRouter>
-      <Header />
-
-      <main>
-        <Routes>
-          <Route path="/" element={auth ? <Home /> : <Navigate to="/login" />} />
-          <Route path="/login" element={auth ? <Navigate to="/" /> : <Login />} />
-          <Route path="/cadastrar" element={auth ? <Navigate to="/" /> : <Register />} />
-          <Route path="/perfil" element={auth ? <EditProfile /> : <Navigate to="/login" />} />
-          <Route path="/usuario/:id" element={auth ? <Profile /> : <Navigate to="/login" />} />
-          <Route path="/fotos/:id" element={auth ? <Photo /> : <Navigate to="/login" />} />
-        </Routes>
-      </main>
-
-      <Footer />
-    </BrowserRouter>
+    <>
+      <div>
+        <a href="https://vite.dev" target="_blank">
+          <img src={viteLogo} className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://react.dev" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+      </div>
+      <h1>Vite + React</h1>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+        <p>
+          Edit <code>src/App.jsx</code> and save to test HMR
+        </p>
+      </div>
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
+    </>
   )
 }
 
