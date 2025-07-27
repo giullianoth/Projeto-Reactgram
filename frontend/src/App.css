@@ -17,6 +17,8 @@
   cursor: pointer;
   opacity: 0.8;
   transition: var(--transition);
+  font-size: inherit;
+  font-family: inherit;
 }
 
 .button:hover {
@@ -26,4 +28,41 @@
 .button.clear {
   padding: 0;
   background: none;
+}
+
+.button:disabled, .button.disabled {
+  background-color: var(--color-secondary-button);
+  cursor: not-allowed;
+}
+
+.button:disabled:hover, .button.disabled:hover {
+  opacity: 0.8;
+}
+
+.main-navigation-link.active {
+  color: var(--color-primary-button);
+}
+
+.bordered-wrapper {
+  padding-block: 30px;
+}
+
+.bordered-wrapper.first {
+  padding-top: 0;
+}
+
+.bordered-wrapper.last {
+  border-top: 1px solid var(--color-primary-border);
+  padding-bottom: 0;
+}
+
+@media screen and (min-width: 576px) {
+  .bordered-wrapper {
+    padding: 40px;
+    border: 1px solid var(--color-primary-border);
+  }
+
+  .bordered-wrapper:not(.last) {
+    margin-bottom: 40px;
+  }
 }

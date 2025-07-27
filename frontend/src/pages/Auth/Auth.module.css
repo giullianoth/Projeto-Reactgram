@@ -1,0 +1,16 @@
+.auth {
+    text-align: center;
+}
+
+.auth__title {
+    margin-bottom: 30px;
+}
+
+.auth__title h2 {
+    font-size: 2.2em;
+    margin-bottom: 10px;
+}
+
+.auth__change a {
+    color: var(--color-primary-button);
+}

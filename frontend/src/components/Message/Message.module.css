@@ -1,0 +1,22 @@
+.message {
+    margin-top: 20px;
+    text-align: center;
+    padding: 10px;
+    background-color: var(--color-secondary-button);
+    color: var(--color-primary-border);
+    border-radius: 5px;
+    border: 1px solid var(--color-primary-border);
+    font-weight: 500;
+}
+
+.message.error {
+    background-color: var(--color-red-background);
+    color: var(--color-red-text);
+    border-color: var(--color-red-text);
+}
+
+.message.success {
+    background-color: var(--color-green-background);
+    color: var(--color-green-text);
+    border-color: var(--color-green-text);
+}

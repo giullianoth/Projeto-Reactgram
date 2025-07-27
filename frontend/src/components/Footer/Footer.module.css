@@ -2,4 +2,5 @@
     padding-block: 10px;
     text-align: center;
     border-top: 1px solid var(--color-primary-border);
+    font-size: 0.8em;
 }

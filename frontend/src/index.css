@@ -7,6 +7,11 @@
   --color-primary-border: #555555;
   --color-secondary-background: #363636;
   --color-secondary-text: #737373;
+  --color-secondary-button: #BBB;
+  --color-red-text: #CF1D23;
+  --color-red-background: #F38291;
+  --color-green-text: #008800;
+  --color-green-background: #85F7A1;
 
   --font-roboto: "Roboto", sans-serif;
   --font-kaushan: "Kaushan Script", cursive;
@@ -39,6 +44,12 @@ svg {
   vertical-align: middle;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 input, textarea {
   background-color: var(--color-secondary-background);
   color: var(--color-primary-text);
@@ -48,4 +59,8 @@ input, textarea {
   outline: none;
   font-family: inherit;
   font-size: inherit;
+}
+
+section {
+  padding-block: 60px;
 }
