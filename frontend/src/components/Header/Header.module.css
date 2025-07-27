@@ -3,6 +3,7 @@
     border-bottom: 1px solid var(--color-primary-border);
     position: sticky;
     top: 0;
+    background-color: var(--color-primary-background);
 }
 
 .header__container {
@@ -13,7 +14,7 @@
 }
 
 .header__logo a {
-    font-size: 1.2em;
+    font-size: 1.2rem;
 }
 
 .header__navigation {
@@ -23,7 +24,12 @@
 .header__navigationLinks {
     display: flex;
     align-items: center;
-    column-gap: 20px;
+    column-gap: 12px;
+}
+
+.header__profileImage {
+    width: 1.4em;
+    vertical-align: middle;
 }
 
 .header__searchWrapper {
@@ -32,7 +38,6 @@
     left: 0;
     width: 100%;
     height: 100%;
-    padding: 10px 20px;
     background-color: var(--color-primary-background);
     display: none;
 }
@@ -55,12 +60,14 @@
 .header__searchForm {
     max-width: 576px;
     margin-inline: auto;
+    padding: 10px 20px;
+    position: relative;
 }
 
 .header__searchIcon {
     position: absolute;
     top: 50%;
-    left: 10px;
+    left: 30px;
     transform: translateY(-50%);
     color: var(--color-secondary-text);
 }
@@ -68,11 +75,21 @@
 .header__searchClose {
     position: absolute;
     top: 50%;
-    right: 10px;
+    right: 30px;
     transform: translateY(-50%);
 }
 
+@media screen and (min-width: 768px) {
+    .header__navigationLinks {
+        column-gap: 20px;
+    }
+}
+
 @media screen and (min-width: 992px) {
+    .header__logo a {
+        font-size: 1.4rem;
+    }
+    
     .header__navigation {
         margin: 0;
         order: 3;
@@ -91,8 +108,15 @@
         position: relative;
         width: auto;
         height: auto;
-        padding: 0;
         background: none;
+    }
+
+    .header__searchForm {
+        padding: 0;
+    }
+
+    .header__searchIcon {
+        left: 10px;
     }
 
     .header__searchClose {

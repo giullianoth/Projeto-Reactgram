@@ -2,31 +2,67 @@ import { Link, NavLink } from "react-router-dom"
 import Container from "../Container"
 import styles from "./Header.module.css"
 import Logo from "../Logo"
-import { FaMagnifyingGlass, FaXmark } from "react-icons/fa6"
+import { FaHouseChimney, FaMagnifyingGlass, FaXmark } from "react-icons/fa6"
 import { useState } from "react"
+import { BsFillPersonFill } from "react-icons/bs"
+import { RiLogoutBoxRLine } from "react-icons/ri"
 
 const Header = () => {
     const [searchIsOpen, setSearchIsOpen] = useState(false)
+    const auth = true
+    const user = {}
 
     return (
         <header className={styles.header}>
             <Container className={styles.header__container} large>
                 <div className={styles.header__logo}>
-                    <Link to="/">
-                        <Logo />
-                    </Link>
+                    <h1>
+                        <Link to="/">
+                            <Logo />
+                        </Link>
+                    </h1>
                 </div>
 
                 <div className={styles.header__navigation}>
                     <nav>
                         <ul className={styles.header__navigationLinks}>
-                            <li className={styles.header__navLink}>
-                                <NavLink to="/login" className="main-navigation-link">Entrar</NavLink>
-                            </li>
+                            {auth
+                                ? <>
+                                    {user &&
+                                        <li>
+                                            <NavLink to={`/usuários/${user._id}`} className="main-navigation-link">
+                                                <img src="/images/user.png" alt="User" className={styles.header__profileImage} />
+                                            </NavLink>
+                                        </li>}
 
-                            <li className={styles.header__navLink}>
-                                <NavLink to="/cadastrar" className="main-navigation-link">Cadastrar</NavLink>
-                            </li>
+                                    <li>
+                                        <NavLink to="/" className="main-navigation-link">
+                                            <FaHouseChimney />
+                                        </NavLink>
+                                    </li>
+
+                                    <li>
+                                        <NavLink to="/perfil" className="main-navigation-link">
+                                            <BsFillPersonFill />
+                                        </NavLink>
+                                    </li>
+
+                                    <li>
+                                        <button className="button clear" title="Sair">
+                                            <RiLogoutBoxRLine />
+                                        </button>
+                                    </li>
+                                </>
+
+                                : <>
+                                    <li>
+                                        <NavLink to="/login" className="main-navigation-link">Entrar</NavLink>
+                                    </li>
+
+                                    <li>
+                                        <NavLink to="/cadastrar" className="main-navigation-link">Cadastrar</NavLink>
+                                    </li>
+                                </>}
                         </ul>
                     </nav>
                 </div>
