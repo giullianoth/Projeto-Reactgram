@@ -12,6 +12,7 @@
   --color-red-background: #F38291;
   --color-green-text: #008800;
   --color-green-background: #85F7A1;
+  --color-overlay: rgba(0, 0, 0, 0.5);
 
   --font-roboto: "Roboto", sans-serif;
   --font-kaushan: "Kaushan Script", cursive;
@@ -58,7 +59,8 @@ label {
   row-gap: 10px;
 }
 
-input, textarea {
+input,
+textarea {
   background-color: var(--color-secondary-background);
   color: var(--color-primary-text);
   padding: 10px;
@@ -70,7 +72,10 @@ input, textarea {
   display: block;
 }
 
-input:disabled, textarea:disabled, input.disabled, .disabled {
+input:disabled,
+textarea:disabled,
+input.disabled,
+.disabled {
   background-color: transparent;
   color: var(--color-secondary-text);
   cursor: not-allowed;

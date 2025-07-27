@@ -19,10 +19,19 @@
   transition: var(--transition);
   font-size: inherit;
   font-family: inherit;
+  display: inline-block;
 }
 
 .button:hover {
   opacity: 1;
+}
+
+.button.not-highlighted {
+  background-color: var(--color-primary-border);
+}
+
+.button.small {
+  padding: 6px 14px;
 }
 
 .button.clear {

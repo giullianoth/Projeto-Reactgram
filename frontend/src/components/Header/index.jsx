@@ -30,7 +30,7 @@ const Header = () => {
                                 ? <>
                                     {user &&
                                         <li>
-                                            <NavLink to={`/usuários/${user._id}`} className="main-navigation-link">
+                                            <NavLink to={`/usuarios/${user._id}`} className="main-navigation-link">
                                                 <img src="/images/user.png" alt="User" className={styles.header__profileImage} />
                                             </NavLink>
                                         </li>}
