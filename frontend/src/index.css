@@ -50,6 +50,14 @@ form {
   gap: 10px;
 }
 
+label {
+  display: block;
+  padding-block: 10px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
 input, textarea {
   background-color: var(--color-secondary-background);
   color: var(--color-primary-text);
@@ -59,8 +67,23 @@ input, textarea {
   outline: none;
   font-family: inherit;
   font-size: inherit;
+  display: block;
+}
+
+input:disabled, textarea:disabled, input.disabled, .disabled {
+  background-color: transparent;
+  color: var(--color-secondary-text);
+  cursor: not-allowed;
 }
 
 section {
   padding-block: 60px;
+}
+
+img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  object-fit: cover;
+  object-position: center;
 }

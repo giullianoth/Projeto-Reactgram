@@ -1,0 +1,24 @@
+.profile__title {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.profile__title h2 {
+    font-size: 2.2em;
+    margin-bottom: 20px;
+}
+
+.profile__imagePreview {
+    margin-bottom: 20px;
+}
+
+.profile__imagePreview img {
+    width: 140px;
+    margin-inline: auto;
+}
+
+@media screen and (min-width: 992px) {
+    .profile__imagePreview img {
+        width: 170px;
+    }
+}

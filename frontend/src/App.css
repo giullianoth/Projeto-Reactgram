@@ -56,13 +56,21 @@
   padding-bottom: 0;
 }
 
+.bordered-wrapper.unique {
+  padding-block: 0;
+}
+
 @media screen and (min-width: 576px) {
-  .bordered-wrapper {
+  .bordered-wrapper, .bordered-wrapper.unique {
     padding: 40px;
     border: 1px solid var(--color-primary-border);
   }
 
   .bordered-wrapper:not(.last) {
     margin-bottom: 40px;
+  }
+
+  .bordered-wrapper.unique {
+    margin: 0;
   }
 }

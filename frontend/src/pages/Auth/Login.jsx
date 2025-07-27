@@ -30,14 +30,14 @@ const Login = () => {
               type="email"
               name="email"
               placeholder="E-mail"
-              value={email}
+              value={email ?? ""}
               onChange={event => setEmail(event.target.value)} />
 
             <input
               type="password"
               name="password"
               placeholder="Senha"
-              value={password}
+              value={password ?? ""}
               onChange={event => setPassword(event.target.value)} />
 
             <button type="submit" className="button">Entrar</button>

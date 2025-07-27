@@ -5,6 +5,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import Login from './pages/Auth/Login'
 import Register from './pages/Auth/Register'
+import EditProfile from './pages/EditProfile'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route path='/cadastrar' element={<Register />} />
+          <Route path='/perfil' element={<EditProfile />} />
         </Routes>
       </main>
 

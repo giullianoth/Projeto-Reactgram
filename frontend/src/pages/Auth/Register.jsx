@@ -32,28 +32,28 @@ const Register = () => {
                             type="text"
                             name="name"
                             placeholder="Nome"
-                            value={name}
+                            value={name ?? ""}
                             onChange={event => setName(event.target.value)} />
 
                         <input
                             type="email"
                             name="email"
                             placeholder="E-mail"
-                            value={email}
+                            value={email ?? ""}
                             onChange={event => setEmail(event.target.value)} />
 
                         <input
                             type="password"
                             name="password"
                             placeholder="Senha"
-                            value={password}
+                            value={password ?? ""}
                             onChange={event => setPassword(event.target.value)} />
 
                         <input
                             type="password"
                             name="confirmPassword"
                             placeholder="Confirmar senha"
-                            value={confirmPassword}
+                            value={confirmPassword ?? ""}
                             onChange={event => setConfirmPassword(event.target.value)} />
 
                         <button type="submit" className="button">Cadastrar</button>
