@@ -11,6 +11,8 @@ const EditProfile = () => {
     const [password, setPassword] = useState("")
     const [previewImage, setPreviewImage] = useState("")
 
+    const user = {}
+
     const handleFile = event => {
         const image = event.target.files[0]
         setPreviewImage(image)
@@ -31,7 +33,15 @@ const EditProfile = () => {
                     </header>
 
                     <div className={styles.profile__imagePreview}>
-                        <img src="/images/user.png" alt="User" />
+                        <img
+                            src={
+                                user.profileImage || previewImage
+                                    ? (previewImage
+                                        ? URL.createObjectURL(previewImage)
+                                        : "/images/user.png")
+                                    : "/images/user.png"
+                            }
+                            alt="User" />
                     </div>
 
                     <form onSubmit={handleSubmit}>
