@@ -1,0 +1,74 @@
+.photo {
+    padding-inline: 0;
+}
+
+.photo__heading {
+    padding-inline: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.photo__profileImage {
+    flex-basis: 40px;
+}
+
+.photo__profileImage img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.photo__userName {
+    flex-basis: calc(100% - 40px - 10px);
+}
+
+.photo__userName h2 {
+    font-size: 1em;
+}
+
+.photo__userName p {
+    color: var(--color-secondary-text);
+    font-size: 0.8em;
+}
+
+.photo__image {
+    margin-bottom: 20px;
+}
+
+.photo__actions {
+    padding-inline: 20px;
+    margin-bottom: 10px;
+}
+
+.photo__actions svg {
+    font-size: 1.3em;
+    margin-right: 10px;
+}
+
+.photo__likesQt {
+    margin-top: 10px;
+}
+
+.photo__info {
+    padding-inline: 20px;
+}
+
+.photo__comments {
+    margin-top: 10px;
+    font-size: 0.8em;
+    color: var(--color-secondary-text);
+}
+
+@media screen and (min-width: 480px) {
+    .photo {
+        padding-inline: 20px;
+    }
+
+    .photo__heading,
+    .photo__actions,
+    .photo__info {
+        padding-inline: 0;
+    }
+}
