@@ -30,6 +30,8 @@
 
 .header__profileImage {
     width: 1.4em;
+    height: 1.4em;
+    border-radius: 50%;
     vertical-align: middle;
 }
 

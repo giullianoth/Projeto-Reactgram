@@ -7,6 +7,17 @@ import PhotoForm from "../../components/PhotoForm"
 
 const Profile = () => {
     const [formIsOpen, setFormIsOpen] = useState(false)
+    const [editing, setEditing] = useState(false)
+
+    const handleOpenFormEdit = () => {
+        setEditing(true)
+        setFormIsOpen(true)
+    }
+
+    const handleCancelForm = () => {
+        setEditing(false)
+        setFormIsOpen(false)
+    }
 
     return (
         <>
@@ -26,7 +37,7 @@ const Profile = () => {
                                 ? <button className="button small" onClick={() => setFormIsOpen(false)}>Ver publicações</button>
 
                                 : <>
-                                    <Link to="/profile" className="button small not-highlighted">Editar Perfil</Link>
+                                    <Link to="/perfil" className="button small not-highlighted">Editar Perfil</Link>
                                     <button className="button small" onClick={() => setFormIsOpen(true)}>Novo Post</button>
                                 </>}
                         </div>
@@ -42,9 +53,16 @@ const Profile = () => {
             <section className={styles.photos}>
                 <Container>
                     {formIsOpen
-                        ? <PhotoForm />
+                        ? (editing
+                            ? <PhotoForm
+                                action="edit"
+                                onCancel={handleCancelForm} />
 
-                        : <PhotosList />}
+                            : <PhotoForm
+                                action="create"
+                                onCancel={handleCancelForm} />)
+
+                        : <PhotosList onEdit={handleOpenFormEdit} />}
                 </Container>
             </section>
         </>

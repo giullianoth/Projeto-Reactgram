@@ -1,0 +1,22 @@
+.form__title {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.form__title h3 {
+    font-size: 1.4em;
+}
+
+.form__photoPreview {
+    margin-bottom: 20px;
+}
+
+.form__buttonWrapper {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.form__buttonWrapper button {
+    flex-grow: 1;
+}
