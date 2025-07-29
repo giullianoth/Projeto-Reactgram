@@ -10,17 +10,20 @@
     margin-bottom: 20px;
 }
 
-.photo__profileImage {
+.photo__profileImage,
+.photo__commentImage {
     flex-basis: 40px;
 }
 
-.photo__profileImage img {
+.photo__profileImage img,
+.photo__commentImage img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
 }
 
-.photo__userName {
+.photo__userName,
+.photo__commentInfo {
     flex-basis: calc(100% - 40px - 10px);
 }
 
@@ -65,6 +68,44 @@
     color: var(--color-secondary-text);
 }
 
+.photo__commentsWrapper,
+.photo__commentsForm {
+    margin-top: 20px;
+    padding-inline: 20px;
+}
+
+.photo__commentsTitle {
+    font-size: 1em;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.photo__commentsTitle button {
+    font-size: 0.8em;
+    color: var(--color-secondary-text);
+}
+
+.photo__comment {
+    display: flex;
+    gap: 10px;
+}
+
+.photo__comment:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+.photo__commentDate {
+    color: var(--color-secondary-text);
+    font-size: 0.8em;
+    margin-top: 6px;
+}
+
+.photo__commentsForm p {
+    margin-bottom: 20px;
+}
+
 @media screen and (min-width: 480px) {
     .photo {
         padding-inline: 20px;
@@ -72,7 +113,9 @@
 
     .photo__heading,
     .photo__actions,
-    .photo__info {
+    .photo__info,
+    .photo__commentsWrapper,
+    .photo__commentsForm {
         padding-inline: 0;
     }
 }

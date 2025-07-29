@@ -45,7 +45,7 @@ const PhotoForm = ({ action, onCancel }) => {
                         onChange={event => setImage(event.target.files[0])} />
                 </label>
 
-                <div className={styles.form__buttonWrapper}>
+                <div className="form-button-wrapper">
                     <button type="submit" className="button">
                         {action === "create" && "Postar"}
                         {action === "edit" && "Atualizar"}

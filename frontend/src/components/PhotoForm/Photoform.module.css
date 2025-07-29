@@ -10,13 +10,3 @@
 .form__photoPreview {
     margin-bottom: 20px;
 }
-
-.form__buttonWrapper {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.form__buttonWrapper button {
-    flex-grow: 1;
-}
