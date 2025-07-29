@@ -1,0 +1,18 @@
+.home__photo:not(:first-child) > div {
+    padding-top: 30px;
+}
+
+.home__photo:not(:last-child) > div {
+    padding-bottom: 30px;
+}
+
+@media screen and (min-width: 480px) {
+    .home__photo:not(:last-child) > div {
+        padding-bottom: 0;
+    }
+
+    .home__photo:not(:last-child) > div > div:last-child {
+        border-bottom: 1px solid var(--color-primary-border);
+        padding-bottom: 30px;
+    }
+}

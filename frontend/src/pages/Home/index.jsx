@@ -1,8 +1,21 @@
+import PhotoItem from "../../components/PhotoItem"
 import styles from "./Home.module.css"
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <section>
+      <div className={styles.home__photo}>
+        <PhotoItem />
+      </div>
+
+      <div className={styles.home__photo}>
+        <PhotoItem />
+      </div>
+      
+      <div className={styles.home__photo}>
+        <PhotoItem />
+      </div>
+    </section>
   )
 }
 
