@@ -34,7 +34,7 @@ const Profile = () => {
 
                         <div className={styles.profile__actions}>
                             {formIsOpen
-                                ? <button className="button small" onClick={() => setFormIsOpen(false)}>Ver publicações</button>
+                                ? <button className="button small" onClick={handleCancelForm}>Ver publicações</button>
 
                                 : <>
                                     <Link to="/perfil" className="button small not-highlighted">Editar Perfil</Link>

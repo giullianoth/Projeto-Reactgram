@@ -37,6 +37,10 @@
     margin-bottom: 20px;
 }
 
+.photo__image img {
+    width: 100%;
+}
+
 .photo__actions {
     padding-inline: 20px;
     margin-bottom: 10px;
