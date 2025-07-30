@@ -8,6 +8,7 @@ import Register from './pages/Auth/Register'
 import EditProfile from './pages/EditProfile'
 import Profile from './pages/Profile'
 import Photo from './pages/Photo'
+import Search from './pages/Search'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path='/cadastrar' element={<Register />} />
           <Route path='/perfil' element={<EditProfile />} />
           <Route path='/usuarios/:id' element={<Profile />} />
+          <Route path='/buscar' element={<Search />} />
           <Route path='/fotos/:id' element={<Photo />} />
         </Routes>
       </main>

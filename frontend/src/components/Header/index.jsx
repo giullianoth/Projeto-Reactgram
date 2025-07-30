@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom"
+import { Link, NavLink, useNavigate } from "react-router-dom"
 import Container from "../Container"
 import styles from "./Header.module.css"
 import Logo from "../Logo"
@@ -9,8 +9,18 @@ import { RiLogoutBoxRLine } from "react-icons/ri"
 
 const Header = () => {
     const [searchIsOpen, setSearchIsOpen] = useState(false)
+    const [query, setQuery] = useState("")
     const auth = true
     const user = {}
+    const navigate = useNavigate()
+
+    const handleSearch = event => {
+        event.preventDefault()
+
+        if (query) {
+            navigate(`/buscar?q=${query}`)
+        }
+    }
 
     return (
         <header className={styles.header}>
@@ -78,8 +88,13 @@ const Header = () => {
                         <div className={styles.header__searchForm}>
                             <FaMagnifyingGlass className={styles.header__searchIcon} />
 
-                            <form>
-                                <input type="text" name="search" placeholder="Pesquisar" />
+                            <form onSubmit={handleSearch}>
+                                <input
+                                    type="text"
+                                    name="search"
+                                    placeholder="Pesquisar"
+                                    value={query}
+                                    onChange={event => setQuery(event.target.value)} />
                             </form>
 
                             <button
