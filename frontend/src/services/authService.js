@@ -8,7 +8,7 @@ const register = async data => {
             .then(res => res.json())
             .catch(err => err)
 
-        if (res) {
+        if (res && !Object.keys(res).includes("errors")) {
             localStorage.setItem("user", JSON.stringify(res))
         }
 
@@ -18,6 +18,8 @@ const register = async data => {
     }
 }
 
-const authService = { register }
+const logout = () => localStorage.removeItem("user")
+
+const authService = { register, logout }
 
 export default authService

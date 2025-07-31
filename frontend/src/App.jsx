@@ -1,5 +1,5 @@
 import './App.css'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -9,17 +9,24 @@ import EditProfile from './pages/EditProfile'
 import Profile from './pages/Profile'
 import Photo from './pages/Photo'
 import Search from './pages/Search'
+import { useAuth } from './hooks/useAuth'
 
 function App() {
+  const { auth, loading } = useAuth()
+
+  if (loading) {
+    return <div className='loading'>Carregando...</div>
+  }
+
   return (
     <BrowserRouter>
       <Header />
 
       <main>
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/cadastrar' element={<Register />} />
+          <Route path='/' element={auth ? <Home /> : <Navigate to='/login' />} />
+          <Route path='/login' element={!auth ? <Login /> : <Navigate to='/' />} />
+          <Route path='/cadastrar' element={!auth ? <Register /> : <Navigate to='/' />} />
           <Route path='/perfil' element={<EditProfile />} />
           <Route path='/usuarios/:id' element={<Profile />} />
           <Route path='/buscar' element={<Search />} />

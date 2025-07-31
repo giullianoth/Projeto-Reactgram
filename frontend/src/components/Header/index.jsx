@@ -6,13 +6,18 @@ import { FaHouseChimney, FaMagnifyingGlass, FaXmark } from "react-icons/fa6"
 import { useState } from "react"
 import { BsFillPersonFill } from "react-icons/bs"
 import { RiLogoutBoxRLine } from "react-icons/ri"
+import { useAuth } from "../../hooks/useAuth"
+import { useDispatch, useSelector } from "react-redux"
+import { uploads } from "../../utils/config"
+import { logout, reset } from "../../slices/authSlice"
 
 const Header = () => {
     const [searchIsOpen, setSearchIsOpen] = useState(false)
     const [query, setQuery] = useState("")
-    const auth = false
-    const user = {}
+    const { auth } = useAuth()
+    const user = useSelector(state => state.auth)
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const handleSearch = event => {
         event.preventDefault()
@@ -20,6 +25,12 @@ const Header = () => {
         if (query) {
             navigate(`/buscar?q=${query}`)
         }
+    }
+
+    const handleLogout = () => {
+        dispatch(logout())
+        dispatch(reset())
+        navigate("/login")
     }
 
     return (
@@ -41,7 +52,10 @@ const Header = () => {
                                     {user &&
                                         <li>
                                             <NavLink to={`/usuarios/${user._id}`} className="main-navigation-link" title="Meu perfil">
-                                                <img src="/images/user.png" alt="User" className={styles.header__profileImage} />
+                                                <img
+                                                    src={user.profileImage ? `${uploads}/users/${user.profileImage}` : "/images/user.png"}
+                                                    alt={user.name}
+                                                    className={styles.header__profileImage} />
                                             </NavLink>
                                         </li>}
 
@@ -58,7 +72,7 @@ const Header = () => {
                                     </li>
 
                                     <li>
-                                        <button className="button clear" title="Sair">
+                                        <button className="button clear" title="Sair" onClick={handleLogout}>
                                             <RiLogoutBoxRLine />
                                         </button>
                                     </li>
