@@ -10,7 +10,7 @@ import { RiLogoutBoxRLine } from "react-icons/ri"
 const Header = () => {
     const [searchIsOpen, setSearchIsOpen] = useState(false)
     const [query, setQuery] = useState("")
-    const auth = true
+    const auth = false
     const user = {}
     const navigate = useNavigate()
 
@@ -40,19 +40,19 @@ const Header = () => {
                                 ? <>
                                     {user &&
                                         <li>
-                                            <NavLink to={`/usuarios/${user._id}`} className="main-navigation-link">
+                                            <NavLink to={`/usuarios/${user._id}`} className="main-navigation-link" title="Meu perfil">
                                                 <img src="/images/user.png" alt="User" className={styles.header__profileImage} />
                                             </NavLink>
                                         </li>}
 
                                     <li>
-                                        <NavLink to="/" className="main-navigation-link">
+                                        <NavLink to="/" className="main-navigation-link" title="Página inicial">
                                             <FaHouseChimney />
                                         </NavLink>
                                     </li>
 
                                     <li>
-                                        <NavLink to="/perfil" className="main-navigation-link">
+                                        <NavLink to="/perfil" className="main-navigation-link" title="Editar perfil">
                                             <BsFillPersonFill />
                                         </NavLink>
                                     </li>

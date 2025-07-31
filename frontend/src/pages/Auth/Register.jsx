@@ -2,8 +2,10 @@ import { Link } from "react-router-dom"
 import Container from "../../components/Container"
 import Logo from "../../components/Logo"
 import styles from "./Auth.module.css"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Message from "../../components/Message"
+import { useDispatch, useSelector } from "react-redux"
+import { register, reset } from "../../slices/authSlice"
 
 const Register = () => {
     const [name, setName] = useState("")
@@ -11,8 +13,17 @@ const Register = () => {
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
 
+    const dispatch = useDispatch()
+    const { loading, error } = useSelector(state => state.auth)
+
+    useEffect(() => {
+        dispatch(reset())
+    }, [dispatch])
+
     const handleSubmit = event => {
         event.preventDefault()
+        const user = { name, email, password, confirmPassword }
+        dispatch(register(user))
     }
 
     return (
@@ -56,10 +67,12 @@ const Register = () => {
                             value={confirmPassword ?? ""}
                             onChange={event => setConfirmPassword(event.target.value)} />
 
-                        <button type="submit" className="button">Cadastrar</button>
+                        <button type="submit" className="button" disabled={loading}>
+                            {loading ? "Aguarde..." : "Cadastrar"}
+                        </button>
                     </form>
 
-                    <Message message="Mensaaaaaaaaaagem!" type="error" />
+                    {error && <Message message={error} type="error" />}
                 </div>
 
                 <div className={`bordered-wrapper last ${styles.auth__change}`}>
