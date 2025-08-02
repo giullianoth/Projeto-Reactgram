@@ -1,4 +1,4 @@
-import { FaRegComment, FaRegHeart } from "react-icons/fa6"
+import { FaHeart, FaRegComment, FaRegHeart } from "react-icons/fa6"
 import Container from "../Container"
 import styles from "./PhotoItem.module.css"
 import { Link } from "react-router-dom"
@@ -8,14 +8,17 @@ import Message from "../Message"
 import { uploads } from "../../utils/config"
 import { useDispatch, useSelector } from "react-redux"
 import { getUserDetails } from "../../slices/userSlice"
+import { like } from "../../slices/photoSlice"
+import { useResetComponentMessage } from "../../hooks/useResetComponentMessage"
 
-const PhotoItem = ({ photo }) => {
+const PhotoItem = ({ photo, userAuth, error, message }) => {
     const [formCommentIsOpen, setFormCommentIsOpen] = useState(false)
     const [commentsIsOpen, setCommentsIsOpen] = useState(false)
     const [commentText, setCommentText] = useState("")
 
     const dispatch = useDispatch()
     const { user } = useSelector(state => state.user)
+    const resetMessage = useResetComponentMessage(dispatch)
 
     const photoDate = (new Date(photo.createdAt)).toLocaleDateString()
 
@@ -24,6 +27,11 @@ const PhotoItem = ({ photo }) => {
             dispatch(getUserDetails(photo.userId))
         }
     }, [dispatch, photo])
+
+    const handleLike = () => {
+        dispatch(like(photo._id))
+        resetMessage()
+    }
 
     const handleComment = event => {
         event.preventDefault()
@@ -55,9 +63,12 @@ const PhotoItem = ({ photo }) => {
                 </div>}
 
             <div className={styles.photo__actions}>
-                <button className="button clear" title="Curtir">
-                    <FaRegHeart />
-                </button>
+                {photo.likes && photo.likes.includes(userAuth._id)
+                    ? <FaHeart className={styles.photo__liked} />
+
+                    : <button className="button clear" title="Curtir" onClick={handleLike}>
+                        <FaRegHeart />
+                    </button>}
 
                 <button
                     className="button clear"
@@ -139,6 +150,9 @@ const PhotoItem = ({ photo }) => {
                     <Message message="Mensaaaaaaaaaagem!" type="error" />
                 </div>
             </AnimateHeight>
+
+            {error && <Message message={error} type="error" />}
+            {message && <Message message={message} type="success" />}
         </Container>
     )
 }

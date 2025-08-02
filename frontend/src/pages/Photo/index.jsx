@@ -20,7 +20,11 @@ const Photo = () => {
 
   return (
     <section>
-      <PhotoItem photo={photo} />
+      <PhotoItem
+        photo={photo}
+        userAuth={user}
+        error={error}
+        message={message} />
     </section>
   )
 }

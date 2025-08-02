@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { getUserDetails } from "../../slices/userSlice"
 import { uploads } from "../../utils/config"
 import { deletePhoto, getPhotosByUser, publishPhoto, resetMessage, updatePhoto } from "../../slices/photoSlice"
+import { useResetComponentMessage } from "../../hooks/useResetComponentMessage"
 
 const Profile = () => {
     const [formIsOpen, setFormIsOpen] = useState(false)
@@ -19,6 +20,7 @@ const Profile = () => {
     const { user, loading } = useSelector(state => state.user)
     const { user: userAuth } = useSelector(state => state.auth)
     const { photos, loading: photoLoading, message: photoMessage, error: photoError } = useSelector(state => state.photo)
+    const resetMessage = useResetComponentMessage(dispatch)
 
     useEffect(() => {
         dispatch(getUserDetails(id))
@@ -41,10 +43,7 @@ const Profile = () => {
         Object.keys(photoData).forEach(key => formData.append(key, photoData[key]))
 
         dispatch(publishPhoto(formData))
-
-        setTimeout(() => {
-            dispatch(resetMessage())
-        }, 2000)
+        resetMessage()
     }
 
     const handleDeletePhoto = id => {
@@ -52,19 +51,13 @@ const Profile = () => {
 
         if (confirmDelete) {
             dispatch(deletePhoto(id))
-
-            setTimeout(() => {
-                dispatch(resetMessage())
-            }, 2000)
+            resetMessage()
         }
     }
 
     const handleUpdatePhoto = photoData => {
         dispatch(updatePhoto(photoData))
-
-        setTimeout(() => {
-            dispatch(resetMessage())
-        }, 2000)
+        resetMessage()
     }
 
     if (loading) {

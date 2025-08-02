@@ -54,6 +54,10 @@
     margin-right: 10px;
 }
 
+.photo__liked {
+    color: #F7324C;
+}
+
 .photo__likesQt {
     margin-top: 10px;
 }
