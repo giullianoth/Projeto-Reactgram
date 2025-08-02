@@ -8,7 +8,7 @@ import Message from "../Message"
 import { uploads } from "../../utils/config"
 import { useDispatch, useSelector } from "react-redux"
 import { getUserDetails } from "../../slices/userSlice"
-import { like } from "../../slices/photoSlice"
+import { comment, like } from "../../slices/photoSlice"
 import { useResetComponentMessage } from "../../hooks/useResetComponentMessage"
 
 const PhotoItem = ({ photo, userAuth, error, message }) => {
@@ -21,6 +21,7 @@ const PhotoItem = ({ photo, userAuth, error, message }) => {
     const resetMessage = useResetComponentMessage(dispatch)
 
     const photoDate = (new Date(photo.createdAt)).toLocaleDateString()
+    const commentDate = date => (new Date(date)).toLocaleDateString()
 
     useEffect(() => {
         if (photo.userId) {
@@ -35,6 +36,15 @@ const PhotoItem = ({ photo, userAuth, error, message }) => {
 
     const handleComment = event => {
         event.preventDefault()
+
+        const commentData = {
+            comment: commentText,
+            id: photo._id
+        }
+
+        dispatch(comment(commentData))
+        setCommentText("")
+        resetMessage()
     }
 
     return (
@@ -111,18 +121,28 @@ const PhotoItem = ({ photo, userAuth, error, message }) => {
 
                     <div className={styles.photo__commentsList}>
                         {photo.comments && photo.comments.length
-                            ? <div className={styles.photo__comment}>
-                                <div className={styles.photo__commentImage}>
-                                    <img src="/images/user.png" alt="User" />
-                                </div>
+                            ? photo.comments.map((comment, index) => (
+                                <div key={`comment-${index + 1}`} className={styles.photo__comment}>
+                                    <div className={styles.photo__commentImage}>
+                                        <Link to={`/usuarios/${comment.userId}`}>
+                                            <img src={comment.userImage ? `${uploads}/users/${comment.userImage}` : "/images/user.png"} alt={comment.userName} />
+                                        </Link>
+                                    </div>
 
-                                <div className={styles.photo__commentInfo}>
-                                    <p><strong>User</strong> Comentááááááááário!!</p>
-                                    <p className={styles.photo__commentDate}>27 de julho de 2025</p>
-                                </div>
-                            </div>
+                                    <div className={styles.photo__commentInfo}>
+                                        <p>
+                                            <Link to={`/usuarios/${comment.userId}`}>
+                                                <strong>{comment.userName}</strong>
+                                            </Link>&nbsp;
+                                            {comment.comment}
+                                        </p>
 
-                            : <p>Ainda não tem comentários</p>}
+                                        <p className={styles.photo__commentDate}>{commentDate(photo.updatedAt)}</p>
+                                    </div>
+                                </div>
+                            ))
+
+                            : <p>Ainda não há comentários</p>}
                     </div>
                 </article>
             </AnimateHeight>
@@ -138,16 +158,18 @@ const PhotoItem = ({ photo, userAuth, error, message }) => {
                             type="text"
                             name="comment"
                             placeholder="Escreva seu comentário..."
-                            value={commentText}
+                            value={commentText ?? ""}
                             onChange={event => setCommentText(event.target.value)} />
 
                         <div className="form-button-wrapper">
                             <button type="submit" className="button">Enviar</button>
-                            <button className="button not-highlighted" onClick={() => setFormCommentIsOpen(false)}>Cancelar</button>
+
+                            <button
+                                type="reset"
+                                className="button not-highlighted"
+                                onClick={() => setFormCommentIsOpen(false)}>Cancelar</button>
                         </div>
                     </form>
-
-                    <Message message="Mensaaaaaaaaaagem!" type="error" />
                 </div>
             </AnimateHeight>
 

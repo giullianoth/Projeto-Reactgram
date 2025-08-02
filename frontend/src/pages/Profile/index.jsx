@@ -77,15 +77,16 @@ const Profile = () => {
                             <h2>{user.name}</h2>
                         </header>
 
-                        <div className={styles.profile__actions}>
-                            {formIsOpen
-                                ? <button className="button small" onClick={handleCancelForm}>Ver publicações</button>
+                        {user._id === userAuth._id &&
+                            <div className={styles.profile__actions}>
+                                {formIsOpen
+                                    ? <button className="button small" onClick={handleCancelForm}>Ver publicações</button>
 
-                                : <>
-                                    <Link to="/perfil" className="button small not-highlighted">Editar Perfil</Link>
-                                    <button className="button small" onClick={() => setFormIsOpen(true)}>Novo Post</button>
-                                </>}
-                        </div>
+                                    : <>
+                                        <Link to="/perfil" className="button small not-highlighted">Editar Perfil</Link>
+                                        <button className="button small" onClick={() => setFormIsOpen(true)}>Novo Post</button>
+                                    </>}
+                            </div>}
                     </div>
 
                     <div className={styles.profile__bio}>
