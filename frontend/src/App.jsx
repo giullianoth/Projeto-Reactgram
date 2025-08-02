@@ -27,7 +27,7 @@ function App() {
           <Route path='/' element={auth ? <Home /> : <Navigate to='/login' />} />
           <Route path='/login' element={!auth ? <Login /> : <Navigate to='/' />} />
           <Route path='/cadastrar' element={!auth ? <Register /> : <Navigate to='/' />} />
-          <Route path='/perfil' element={<EditProfile />} />
+          <Route path='/perfil' element={auth ? <EditProfile /> : <Navigate to='/login' />} />
           <Route path='/usuarios/:id' element={<Profile />} />
           <Route path='/buscar' element={<Search />} />
           <Route path='/fotos/:id' element={<Photo />} />
