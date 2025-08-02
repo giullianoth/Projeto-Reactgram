@@ -15,7 +15,7 @@ const Header = () => {
     const [searchIsOpen, setSearchIsOpen] = useState(false)
     const [query, setQuery] = useState("")
     const { auth } = useAuth()
-    const user = useSelector(state => state.auth)
+    const { user } = useSelector(state => state.auth)
     const navigate = useNavigate()
     const dispatch = useDispatch()
 

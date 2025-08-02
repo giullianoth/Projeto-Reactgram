@@ -35,7 +35,7 @@ const EditProfile = () => {
         setProfileImage(image)
     }
 
-    const handleSubmit = async event => {
+    const handleSubmit = event => {
         event.preventDefault()
         const userData = { name }
 
@@ -54,7 +54,7 @@ const EditProfile = () => {
         const formData = new FormData()
         Object.keys(userData).forEach(key => formData.append(key, userData[key]))
 
-        await dispatch(updateProfile(formData))
+        dispatch(updateProfile(formData))
 
         setTimeout(() => {
             dispatch(resetMessage())

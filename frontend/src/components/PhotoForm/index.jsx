@@ -1,13 +1,28 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Message from "../Message"
 import styles from "./PhotoForm.module.css"
+import { uploads } from "../../utils/config"
 
-const PhotoForm = ({ action, onCancel }) => {
+const PhotoForm = ({ action, onCancel, onSubmit, loading, message, error, photoToEdit }) => {
     const [title, setTitle] = useState("")
     const [image, setImage] = useState("")
 
+    useEffect(() => {
+        if (action === "edit" && photoToEdit) {
+            setTitle(photoToEdit.title)
+            setImage(photoToEdit.image)
+        }
+    }, [photoToEdit])
+
     const handleSubmit = event => {
         event.preventDefault()
+        const data = { title, image }
+
+        if (action === "edit") {
+            data.id = photoToEdit._id
+        }
+
+        onSubmit(data)
     }
 
     return (
@@ -19,9 +34,9 @@ const PhotoForm = ({ action, onCancel }) => {
                 </h3>
             </header>
 
-            {action === "edit" &&
+            {action === "edit" && photoToEdit.image &&
                 <div className={styles.form__photoPreview}>
-                    <img src="https://portalhortolandia.com.br/wp-content/uploads/2025/07/Ozzy-Osbourne.jpg" alt="Photo" />
+                    <img src={`${uploads}/photos/${photoToEdit.image}`} alt={photoToEdit.title} />
                 </div>}
 
             <form onSubmit={handleSubmit}>
@@ -36,26 +51,32 @@ const PhotoForm = ({ action, onCancel }) => {
                         onChange={event => setTitle(event.target.value)} />
                 </label>
 
-                <label>
-                    <span>Imagem:</span>
+                {action === "create" &&
+                    <label>
+                        <span>Imagem:</span>
 
-                    <input
-                        type="file"
-                        name="image"
-                        onChange={event => setImage(event.target.files[0])} />
-                </label>
+                        <input
+                            type="file"
+                            name="image"
+                            onChange={event => setImage(event.target.files[0])} />
+                    </label>}
 
                 <div className="form-button-wrapper">
-                    <button type="submit" className="button">
-                        {action === "create" && "Postar"}
-                        {action === "edit" && "Atualizar"}
+                    <button type="submit" className="button" disabled={loading}>
+                        {loading
+                            ? "Aguarde..."
+                            : <>
+                                {action === "create" && "Postar"}
+                                {action === "edit" && "Atualizar"}
+                            </>}
                     </button>
 
                     <button className="button not-highlighted" onClick={onCancel}>Cancelar</button>
                 </div>
             </form>
 
-            <Message message="Mensaaaaaaaaaagem!" type="error" />
+            {error && <Message message={error} type="error" />}
+            {message && <Message message={message} type="success" />}
         </article>
     )
 }

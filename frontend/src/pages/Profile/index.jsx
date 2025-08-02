@@ -1,17 +1,34 @@
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import Container from "../../components/Container"
 import styles from "./Profile.module.css"
 import PhotosList from "../../components/PhotosList"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import PhotoForm from "../../components/PhotoForm"
+import { useDispatch, useSelector } from "react-redux"
+import { getUserDetails } from "../../slices/userSlice"
+import { uploads } from "../../utils/config"
+import { deletePhoto, getPhotosByUser, publishPhoto, resetMessage, updatePhoto } from "../../slices/photoSlice"
 
 const Profile = () => {
     const [formIsOpen, setFormIsOpen] = useState(false)
     const [editing, setEditing] = useState(false)
+    const [photoToEdit, setPhotoToEdit] = useState(null)
 
-    const handleOpenFormEdit = () => {
+    const { id } = useParams()
+    const dispatch = useDispatch()
+    const { user, loading } = useSelector(state => state.user)
+    const { user: userAuth } = useSelector(state => state.auth)
+    const { photos, loading: photoLoading, message: photoMessage, error: photoError } = useSelector(state => state.photo)
+
+    useEffect(() => {
+        dispatch(getUserDetails(id))
+        dispatch(getPhotosByUser(id))
+    }, [dispatch, id])
+
+    const handleOpenFormEdit = photo => {
         setEditing(true)
         setFormIsOpen(true)
+        setPhotoToEdit(photo)
     }
 
     const handleCancelForm = () => {
@@ -19,17 +36,52 @@ const Profile = () => {
         setFormIsOpen(false)
     }
 
+    const handleCreatePhoto = photoData => {
+        const formData = new FormData()
+        Object.keys(photoData).forEach(key => formData.append(key, photoData[key]))
+
+        dispatch(publishPhoto(formData))
+
+        setTimeout(() => {
+            dispatch(resetMessage())
+        }, 2000)
+    }
+
+    const handleDeletePhoto = id => {
+        const confirmDelete = window.confirm("Excluir foto?")
+
+        if (confirmDelete) {
+            dispatch(deletePhoto(id))
+
+            setTimeout(() => {
+                dispatch(resetMessage())
+            }, 2000)
+        }
+    }
+
+    const handleUpdatePhoto = photoData => {
+        dispatch(updatePhoto(photoData))
+
+        setTimeout(() => {
+            dispatch(resetMessage())
+        }, 2000)
+    }
+
+    if (loading) {
+        return <div className='loading'>Carregando...</div>
+    }
+
     return (
         <>
             <section className={styles.profile}>
                 <Container className={styles.profile__container}>
                     <div className={styles.profile__image}>
-                        <img src="/images/user.png" alt="User" />
+                        <img src={user.profileImage ? `${uploads}/users/${user.profileImage}` : "/images/user.png"} alt={user.name} />
                     </div>
 
                     <div className={styles.profile__info}>
                         <header className={styles.profile__name}>
-                            <h2>User</h2>
+                            <h2>{user.name}</h2>
                         </header>
 
                         <div className={styles.profile__actions}>
@@ -44,8 +96,11 @@ const Profile = () => {
                     </div>
 
                     <div className={styles.profile__bio}>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, commodi!</p>
-                        <p className={styles.profile__postsQt}>10 publicações</p>
+                        <p>{user.bio}</p>
+                        <p className={styles.profile__postsQt}>
+                            {photos.length ?? 0}&nbsp;
+                            {photos && photos.length === 1 ? "publicação" : "publicações"}
+                        </p>
                     </div>
                 </Container>
             </section>
@@ -56,13 +111,28 @@ const Profile = () => {
                         ? (editing
                             ? <PhotoForm
                                 action="edit"
-                                onCancel={handleCancelForm} />
+                                onCancel={handleCancelForm}
+                                onSubmit={handleUpdatePhoto}
+                                photoToEdit={photoToEdit}
+                                loading={photoLoading}
+                                message={photoMessage}
+                                error={photoError} />
 
                             : <PhotoForm
                                 action="create"
-                                onCancel={handleCancelForm} />)
+                                onCancel={handleCancelForm}
+                                onSubmit={handleCreatePhoto}
+                                loading={photoLoading}
+                                message={photoMessage}
+                                error={photoError} />)
 
-                        : <PhotosList onEdit={handleOpenFormEdit} />}
+                        : <PhotosList
+                            onEdit={handleOpenFormEdit}
+                            photos={photos}
+                            userId={id}
+                            userAuthId={userAuth._id}
+                            message={photoMessage}
+                            onDelete={handleDeletePhoto} />}
                 </Container>
             </section>
         </>
