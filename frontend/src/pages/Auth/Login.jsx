@@ -1,16 +1,26 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Container from "../../components/Container"
 import Logo from "../../components/Logo"
 import styles from "./Auth.module.css"
 import Message from "../../components/Message"
 import { Link } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { login, reset } from "../../slices/authSlice"
 
 const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const dispatch = useDispatch()
+  const { loading, error } = useSelector(state => state.auth)
+
+  useEffect(() => {
+    dispatch(reset())
+  }, [dispatch])
 
   const handleSubmit = event => {
     event.preventDefault()
+    const user = { email, password }
+    dispatch(login(user))
   }
 
   return (
@@ -40,10 +50,12 @@ const Login = () => {
               value={password ?? ""}
               onChange={event => setPassword(event.target.value)} />
 
-            <button type="submit" className="button">Entrar</button>
+            <button type="submit" className="button" disabled={loading}>
+              {loading ? "Aguarde..." : "Entrar"}
+            </button>
           </form>
 
-          <Message message="Mensaaaaaaaaaagem!" type="error" />
+          {error && <Message message={error} type="error" />}
         </div>
 
         <div className={`bordered-wrapper last ${styles.auth__change}`}>
